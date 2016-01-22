@@ -1,9 +1,9 @@
 #coding:utf-8
 # def ss():
 #  	print 1111
-
+import numpy as np
 def img2vector(filename):
-    returnVect = zeros((1,1024))
+    returnVect = np.zeros((1,1024))
     fr = open(filename)
     for i in range(32):
         lineStr = fr.readline()
@@ -28,10 +28,10 @@ def img2vector(filename):
      return sortedClassCount[0][0]
 """
 
-# if __name__ == '__main__':
-# 	# ss()
-# 	testVector = img2vector('testDigits/0_13.txt')
-#  	print testVector[0, 0:31]
+if __name__ == '__main__':
+	# ss()
+	testVector = img2vector('testDigits/0_13.txt')
+ 	print testVector[0, 0:31]
 
 """
 def handwritingClassTest():
