@@ -1,9 +1,11 @@
 #coding:utf-8
 # def ss():
 #  	print 1111
-import numpy as np
+from numpy import *
+import operator
+from os import listdir
 def img2vector(filename):
-    returnVect = np.zeros((1,1024))
+    returnVect = zeros((1,1024))
     fr = open(filename)
     for i in range(32):
         lineStr = fr.readline()
@@ -11,35 +13,37 @@ def img2vector(filename):
             returnVect[0, 32*i+j] = int(lineStr[j])
     return returnVect
 
+# testVector = img2vector('testDigits/0_13.txt')
+# print testVector
 
-"""
- def classify0(inX, dataSet, labels, k):
- 	 dataSetSize = dataSet.shape[0]
- 	 diffMat = tile(inX, (dataSetSize, 1))-dataSet
- 	 sqDiffMat = diffMat**2
- 	 sqDistances = sqDiffMat.sum(axis = 1)
- 	 distances = sqDistances**0.5
- 	 sortedDistIndicies = distances.argsort()
- 	 classCount = {}
- 	 for i in range(k)
- 	     voteIlabel = labels[sortedDistIndicies[i]]
- 	     classCount[voteIlabel] = classCount.get(voteIlabel, 0)+ 1
-     sortedClassCount = sorted(classCount.iteritems(), key = operator.itemgetter(1), reverse = True)
-     return sortedClassCount[0][0]
-"""
 
-if __name__ == '__main__':
-	# ss()
-	testVector = img2vector('testDigits/0_13.txt')
- 	print testVector[0, 0:31]
 
-"""
+def classify0(inX, dataSet, labels, k):
+	dataSetSize = dataSet.shape[0]
+	diffMat = tile(inX,(dataSetSize,1))-dataSet
+	sqDiffMat = diffMat**2
+	sqDistances = sqDiffMat.sum(axis = 1)
+	distances = sqDistances**0.5
+	sortedDistIndicies = distances.argsort()
+	classCount = {}
+	for i in range(k):
+		voteIlabel = labels[sortedDistIndicies[i]]
+		classCount[voteIlabel] = classCount.get(voteIlabel,0)+1
+	sortedClassCount = sorted(classCount.iteritems(), key = operator.itemgetter(1), reverse = True)
+	return sortedClassCount[0][0]
+    
+
+
+# if __name__ == '__main__':
+# 	# ss()
+	
+
 def handwritingClassTest():
 	hwLabels = []
 	trainingFileList = listdir('trainingDigits')
 	m = len(trainingFileList)
 	trainingMat = zeros((m, 1024))
-	for i in range(m)
+	for i in range(m):
 	    fileNameStr = trainingFileList[i]
 	    fileStr = fileNameStr.split('.')[0]
 	    classNumStr = int(fileStr.split('_')[0])
@@ -58,9 +62,8 @@ def handwritingClassTest():
 		if (classifierResult != classNumStr): errorCount +=1.0
 	print "\nthe total number of errors is: %d" %errorCount
 	print "\nthe total error rate is: %f" %(errorCount/float(mTest))
-"""
-"""
-hfjsh
-"""
+
+result = handwritingClassTest()
+print result
 
 
