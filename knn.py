@@ -61,6 +61,4 @@ def handwritingClassTest():
 """
 
 
-"""
-dfdjksfkkj
-"""
+
